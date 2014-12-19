@@ -1,8 +1,41 @@
 <html>
 <head>
 	<title>Fun Circles</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" height="100%" width="100%"></svg>
 
+	<script>
+
+		var counter = 1;
+		var circles = {};
+
+		function makeSVG(tag, attrs) {
+			var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+			for (var k in attrs) {
+				el.setAttribute(k, attrs[k]);
+			}
+			return el;
+		}
+		
+		function createCircle(cx, cy, r) {
+			var circle = makeSVG('circle', {
+				cx: cx,
+				cy: cy,
+				r: r,
+				id: 'circle'+counter,
+				style: "fill:white"
+			});
+			circles['circle_'+counter] = { radius: r };
+			counter++;
+			document.getElementById('svg').appendChild(circle);
+		}
+
+		myCircle = createCircle(Math.random()*document.body.clientWidth, Math.random()*document.body.clientHeight, 15);
+		console.dir(myCircle);
+
+
+	</script>
 </body>
 </html>
