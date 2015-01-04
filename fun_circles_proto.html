@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Fun Circles Using Prototype</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<style type="text/css">
+		body {
+			background-color: black;
+		}
+		svg {
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<svg id="svg" xmlns="http://www.w3.org/2000/svg" height="100%" width="100%"></svg>
+	<script>
+		function makeSVG(tag, attrs) {
+			var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+			for(var key in attrs) {
+				el.setAttribute(key, attrs[key])
+			}
+			return el;
+		}
+		function createCircle(x, y, radius, r, g, b) {
+			var circle = makeSVG('circle', {
+				cx: x,
+				cy: y,
+				r: radius,
+				fill: "rgb("+r+","+g+","+b+")"			
+			});
+			document.getElementById('svg').appendChild(circle);
+		}
+		var time_begin = new Date();
+		for(var i=1; i<=500; i++) {
+			createCircle.prototype.x = Math.floor(Math.random()*800)+1;
+			createCircle.prototype.y = Math.floor(Math.random()*600)+1;
+			createCircle.prototype.radius = Math.floor(Math.random()*20)+1;
+			createCircle.prototype.r = Math.floor(Math.random()*255),
+			createCircle.prototype.g = Math.floor(Math.random()*255),
+			createCircle.prototype.b = Math.floor(Math.random()*255);
+			createCircle(
+				createCircle.prototype.x,
+				createCircle.prototype.y,
+				createCircle.prototype.radius,
+				createCircle.prototype.r,
+				createCircle.prototype.g,
+				createCircle.prototype.b
+			);
+		}
+		var time_end = new Date();
+		var time = time_end-time_begin;
+		console.log(time);
+	</script>
+</body>
+</html>
