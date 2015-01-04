@@ -2,41 +2,47 @@
 <head>
 	<title>Fun Circles</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<style type="text/css">
+		body {
+			background-color: black;
+		}
+		svg {
+			background-color: white;
+		}
+	</style>
 </head>
 <body>
 	<svg id="svg" xmlns="http://www.w3.org/2000/svg" height="100%" width="100%"></svg>
-
 	<script>
-
-		var counter = 1;
-		var circles = {};
-
 		function makeSVG(tag, attrs) {
-			 obj = {cx: 300, cy: 300, r:100, stroke: 'black', 'stroke-width': 2, fill: 'red'}
-			// var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
-			// for (var k in attrs) {
-			// 	el.setAttribute(k, attrs[k]);
-			// }
-			// return el;
+			var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+			for(var key in attrs) {
+				el.setAttribute(key, attrs[key])
+			}
+			return el;
 		}
-		
-		function createCircle(cx, cy, r) {
+		function createCircle() {
+			var x = Math.floor(Math.random()*800)+1,
+				y = Math.floor(Math.random()*600)+1,
+				radius = Math.floor(Math.random()*20)+1,
+				r = Math.floor(Math.random()*255),
+				g = Math.floor(Math.random()*255),
+				b = Math.floor(Math.random()*255);
 			var circle = makeSVG('circle', {
-				cx: cx,
-				cy: cy,
-				r: r,
-				id: 'circle'+counter,
-				style: "fill:white"
+				cx: x,
+				cy: y,
+				r: radius,
+				fill: "rgb("+r+","+g+","+b+")"			
 			});
-			circles['circle_'+counter] = { radius: r };
-			counter++;
 			document.getElementById('svg').appendChild(circle);
 		}
-
-		myCircle = createCircle(Math.random()*document.body.clientWidth, Math.random()*document.body.clientHeight, 15);
-		console.dir(myCircle);
-
-
+		var time_begin = new Date();
+		for(var i=1; i<=500; i++) {
+			createCircle();
+		}
+		var time_end = new Date();
+		var time = time_end-time_begin;
+		console.log(time);
 	</script>
 </body>
 </html>
